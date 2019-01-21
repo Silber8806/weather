@@ -20,11 +20,12 @@ How to set-up development environment (will dockerize later)
 
 1. Install python 2.7
 2. Install requirements in file: pip install -r ./weather/settings/requirements/base.txt
-3. Install postgres
-4. Create a database and user for this system.
-5. Sign-up for Weatherbit api (https://www.weatherbit.io/account/create)
-6. Sign-up for Sendgrid (https://signup.sendgrid.com/)
-7. create a env with the following settings:
+3. create a folder env in the project root and then create a virtual env called "dev"
+4. Install postgres
+5. Create a database and user for this system.
+6. Sign-up for Weatherbit api (https://www.weatherbit.io/account/create)
+7. Sign-up for Sendgrid (https://signup.sendgrid.com/)
+8. create a env with the following settings:
 
 ```
 # This is a template for environment file...
@@ -50,8 +51,8 @@ export DB_HOST=''
 
 Note: I place in ./apps/webapps/weather/weather/settings/sys_vars/base.env
 
-8. source the environment file above.
-9. run:
+9. source the environment file above.
+10. run:
 
 ```bash
 source run.sh dev 1
@@ -59,14 +60,14 @@ source run.sh dev 1
 
 To start postgres and load the top 100 us cities by population.
 
-10. navigate to ./apps/webapps/weather/ and type:
+11. navigate to ./apps/webapps/weather/ and type:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-11. start webserver
+12. start webserver
 
 ```bash
 python manage.py runserver
@@ -76,8 +77,8 @@ This should start the subscription service at:
 
 http:127.0.0.1:8000/signup
 
-12. sign-up for any number of e-mail subscriptions.  Note e-mails must be unique.
-13. To send mass e-mails:
+13. sign-up for any number of e-mail subscriptions.  Note e-mails must be unique.
+14. To send mass e-mails:
 
 ```bash
 python manage.py send_mass_email
