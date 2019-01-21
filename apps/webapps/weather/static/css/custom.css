@@ -1,0 +1,5 @@
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(247, 202, 201), rgb(145, 168, 209));
+}
