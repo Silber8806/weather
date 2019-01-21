@@ -202,29 +202,29 @@ class Command(BaseCommand):
                 # all the different email combinations
                 # can't get temperature or multiple cities case...
                 if (temp is None):
-                    message="We hope you enjoy this great coupon on us!"
+                    message="We hope you enjoy your time in {} have this great coupon on us!".format(city_state)
                     content = Content("text/plain",message)
                 # we got temperature, but not historical data...
                 elif (history_temp is None):
                     if (email_type == "good"):
-                        message = "Great Weather deserves a great discount!  Enjoy your {} weather ({} F)!".format(weather,temp)
+                        message = "Great Weather in {} deserves a great discount!  Enjoy your {} weather ({} F)!".format(city_state,weather,temp)
                         content = Content("text/plain",message)
                     elif (email_type == "bad"):
-                        message = "Weather looks dreadful! Let's cheer you up with a discount!  Hope the {} weather ({} F) improves!".format(weather,temp)
+                        message = "Weather looks dreadful in {}! Let's cheer you up with a discount!  Hope the {} weather ({} F) improves!".format(city_state,weather,temp)
                         content = Content("text/plain",message)
                     else:
-                        message = "Weather seems mild, not our great discounts!  Hope the {} weather ({} F) improves!".format(weather,temp)
+                        message = "Weather seems mild in {}, not our great discounts!  Hope the {} weather ({} F) improves!".format(city_state,weather,temp)
                 # we have historical data...
                 elif (history_temp):
                     diff_temp = round(float(temp - history_temp),2)
                     if (email_type == "good"):
-                        message = "Weather seems to be improving (a change of  {} F), so are our discounts!  Enjoy your {} weather ({} F)!".format(diff_temp,weather,temp)
+                        message = "Weather seems to be improving in {} (a change of  {} F), so are our discounts!  Enjoy your {} weather ({} F)!".format(city_state,diff_temp,weather,temp)
                         content = Content("text/plain",message)
                     elif (email_type == "bad"):
-                        message = "Brrr...things are getting cold (a change of {} F), but our discounts aren't!  Hope the {} weather ({} F) improves!".format(diff_temp,weather,temp)
+                        message = "Brrr...things are getting colder in {} (a change of {} F), but our discounts aren't!  Hope the {} weather ({} F) improves!".format(city_state,diff_temp,weather,temp)
                         content = Content("text/plain",message)
                     else:
-                        message = "Weather seems mild (a change of  {} F), not our great discounts!  Hope the {} weather ({} F) improves!".format(diff_temp,weather,temp)    
+                        message = "Weather seems mild in {} (a change of  {} F), not our great discounts!  Hope the {} weather ({} F) improves!".format(city_state,diff_temp,weather,temp)    
 
                 # try to send the email...               
                 try:
