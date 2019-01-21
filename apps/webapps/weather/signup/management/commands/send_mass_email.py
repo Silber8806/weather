@@ -214,31 +214,31 @@ class Command(BaseCommand):
                         content = Content("text/plain",message)
                     else:
                         message = "Weather seems mild in {}, not our great discounts!  Hope the {} weather ({} F) improves!".format(city_state,weather,temp)
+                        content = Content("text/plain",message)
                 # we have historical data...
                 elif (history_temp):
                     diff_temp = round(float(temp - history_temp),2)
                     if (email_type == "good"):
-                        message = "Weather seems to be improving in {} (a change of  {} F), so are our discounts!  Enjoy your {} weather ({} F)!".format(city_state,diff_temp,weather,temp)
+                        message = "Weather seems to be great in {}, so are our discounts!  Enjoy your {} weather ({} F: a change of  {} F)!".format(city_state,weather,temp,diff_temp)
                         content = Content("text/plain",message)
                     elif (email_type == "bad"):
-                        message = "Brrr...things are getting colder in {} (a change of {} F), but our discounts aren't!  Hope the {} weather ({} F) improves!".format(city_state,diff_temp,weather,temp)
+                        message = "Brrr...weather doesn't seem so nice in {}, but our discounts are!  Hope the {} weather ({} F: a change of  {} F) improves!".format(city_state,weather,temp,diff_temp)
                         content = Content("text/plain",message)
                     else:
-                        message = "Weather seems mild in {} (a change of  {} F), not our great discounts!  Hope the {} weather ({} F) improves!".format(city_state,diff_temp,weather,temp)    
-
-                # try to send the email...               
-                try:
-                    print("subject:")
-                    print(subject)
-                    print("contents:")
-                    print(message)
-                    mail = Mail(from_email, subject, to_email, content)
-                    response = sg.client.mail.send.post(request_body=mail.get())
-                    print(response.status_code)
-                    print(response.body)
-                    print(response.headers) 
-                except:
-                    print("e-mail failed...")
+                        message = "Weather seems mild in {}, not our great discounts!  Hope the {} weather ({} F: a change of  {} F) improves!".format(city_state,weather,temp,diff_temp)    
+                        content = Content("text/plain",message)
+                # try to send the email...  
+                print ("from email")
+                print(from_email)             
+                print("subject:")
+                print(subject)
+                print("contents:")
+                print(message)
+                mail = Mail(from_email, subject, to_email, content)
+                response = sg.client.mail.send.post(request_body=mail.get())
+                print(response.status_code)
+                print(response.body)
+                print(response.headers) 
 
         customers = Customer.objects.filter(location__id=DEFAULT_LOCATION)
 
@@ -249,14 +249,11 @@ class Command(BaseCommand):
             subject = email_template["normal"]
             content = Content("text/plain","We hope you enjoy this great coupon on us!")
 
-            try:
-                mail = Mail(from_email, subject, to_email, content)
-                response = sg.client.mail.send.post(request_body=mail.get())
-                print(response.status_code)
-                print(response.body)
-                print(response.headers) 
-            except:
-                print("e-mail failed...")           
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)        
 
   
 

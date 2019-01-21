@@ -4,8 +4,10 @@ from django import forms
 
 from .models import Customer, Location
 
+DEFAULT_LOCATION=999999
+
 def get_all_location_choices():
-	query = Location.objects.all()
+	query = Location.objects.exclude(id=DEFAULT_LOCATION).order_by('city','state')
 
 	locations_lst = []
 
@@ -13,7 +15,7 @@ def get_all_location_choices():
 		if result.id != '999999':
 			locations_lst.append(result.city_state)
 
-	locations_lst = tuple([loc for loc in sorted(locations_lst)])
+	locations_lst = tuple([loc for loc in locations_lst])
 
 	return locations_lst
 
