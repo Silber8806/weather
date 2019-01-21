@@ -227,18 +227,13 @@ class Command(BaseCommand):
                     else:
                         message = "Weather seems mild in {}, not our great discounts!  Hope the {} weather ({} F: a change of  {} F) improves!".format(city_state,weather,temp,diff_temp)    
                         content = Content("text/plain",message)
-                # try to send the email...  
-                print ("from email")
-                print(from_email)             
+                # try to send the email...          
                 print("subject:")
                 print(subject)
                 print("contents:")
                 print(message)
                 mail = Mail(from_email, subject, to_email, content)
                 response = sg.client.mail.send.post(request_body=mail.get())
-                print(response.status_code)
-                print(response.body)
-                print(response.headers) 
 
         customers = Customer.objects.filter(location__id=DEFAULT_LOCATION)
 
@@ -251,9 +246,6 @@ class Command(BaseCommand):
 
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)        
 
   
 
