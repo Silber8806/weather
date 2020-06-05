@@ -3,7 +3,7 @@ beautifulsoup4==4.7.1
 bs4==0.0.1
 certifi==2018.11.29
 chardet==3.0.4
-Django==1.11.17
+Django==1.11.29
 idna==2.8
 jellyfish==0.5.6
 psycopg2==2.7.6.1
